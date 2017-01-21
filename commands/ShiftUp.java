@@ -6,7 +6,7 @@ import ticktank.TickTank;
 public class ShiftUp extends Command {
 
 	TickTank tank;
-	
+
 	public ShiftUp(TickTank _tank) {
 		this.tank = _tank;
 	}
@@ -18,7 +18,7 @@ public class ShiftUp extends Command {
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override
@@ -28,11 +28,11 @@ public class ShiftUp extends Command {
 
 	@Override
 	protected void end() {
-		
+
 	}
 
 	@Override
 	protected void interrupted() {
-		
+
 	}
 }

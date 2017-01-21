@@ -142,16 +142,23 @@ public class Profile {
 	}
 
 	/**
-	 * Automatically places the file in the user home on the roborio. Use this in your robot code.
-	 * @param filename The name of the file to be saved, without an extension
+	 * Automatically places the file in the user home on the roborio. Use this
+	 * in your robot code.
+	 * 
+	 * @param filename
+	 *            The name of the file to be saved, without an extension
 	 */
 	public void rioStore(String filename) {
 		this.store("/home/lvuser/" + filename);
 	}
 
 	/**
-	 * Stores a .csv file to a specified path. Use this for prototyping on your computer.
-	 * @param filename the name of the file to be saved. Should include a directory path.
+	 * Stores a .csv file to a specified path. Use this for prototyping on your
+	 * computer.
+	 * 
+	 * @param filename
+	 *            the name of the file to be saved. Should include a directory
+	 *            path.
 	 */
 	public void store(String filename) {
 		String data = "";

@@ -8,7 +8,7 @@ public class Shift extends Command {
 
 	TickTank tank;
 	Gear gear;
-	
+
 	public Shift(TickTank _tank, Gear _gear) {
 		this.tank = _tank;
 		this.gear = _gear;
@@ -25,7 +25,7 @@ public class Shift extends Command {
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class Shift extends Command {
 
 	@Override
 	protected void end() {
-		
+
 	}
 
 	@Override
 	protected void interrupted() {
-		
+
 	}
 }
