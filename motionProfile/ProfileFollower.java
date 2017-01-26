@@ -39,6 +39,10 @@ public class ProfileFollower implements Tickable {
 		this.isInverted = _isInverted;
 	}
 
+	public void restart() {
+		this.i = 0;
+	}
+
 	@Override
 	public void update() {
 		// Make sure i is within bounds of profile

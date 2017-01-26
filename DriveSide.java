@@ -21,9 +21,12 @@ public class DriveSide implements ProfileSource, ProfileOutput {
 
 	private ArrayList<SpeedController> motors;
 	private Encoder enc;
+	private boolean invEncoder;
 
-	public DriveSide(ArrayList<SpeedController> _motors, Encoder _enc) {
+	public DriveSide(ArrayList<SpeedController> _motors, Encoder _enc, boolean _invEncoder) {
 		this.enc = _enc;
+		this.invEncoder = _invEncoder;
+		enc.setReverseDirection(invEncoder);
 
 		motors = new ArrayList<SpeedController>();
 
@@ -47,6 +50,10 @@ public class DriveSide implements ProfileSource, ProfileOutput {
 	@Override
 	public double getDistance() {
 		return enc.getDistance();
+	}
+
+	public Encoder getEncoder() {
+		return enc;
 	}
 
 	public double getSpeed() {

@@ -36,7 +36,7 @@ public class Profile {
 		return list.size();
 	}
 
-	private static final double dt = .02;
+	private static final double dt = .01;
 	private static final double maxTime = 30;
 
 	public Profile(ProfileParameters params) {

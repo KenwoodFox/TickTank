@@ -26,6 +26,8 @@ public class FollowProfile extends Command {
 	public FollowProfile(TickTank _tank, Profile _left, Profile _right, boolean _isInverted) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		tank = _tank;
+
 		requires(tank);
 
 		this.leftProfile = _left;
@@ -52,6 +54,8 @@ public class FollowProfile extends Command {
 	protected void initialize() {
 		System.out.println("Starting FollowProfile Command");
 		tank.zeroEncoders();
+		leftFollower.restart();
+		rightFollower.restart();
 
 		ticker.start();
 	}
@@ -65,9 +69,11 @@ public class FollowProfile extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO
+		/*
 		if (leftFollower.error < .1 && rightFollower.error < .1) {
 			return true;
 		}
+		*/
 		return false;
 	}
 

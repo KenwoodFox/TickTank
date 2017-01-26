@@ -63,8 +63,8 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 			navx = new AHRS(SPI.Port.kMXP);
 		}
 
-		left = new DriveSide(leftMotors, leftEncoder);
-		right = new DriveSide(rightMotors, rightEncoder);
+		left = new DriveSide(leftMotors, leftEncoder, config.leftInvEncoder);
+		right = new DriveSide(rightMotors, rightEncoder, config.rightInvEncoder);
 
 		this.turnParams = config.turnParams;
 		this.driveParams = config.params;
