@@ -1,5 +1,7 @@
 package ticktank.motionProfile;
 
+import pid.PID;
+import pid.PIDParameters;
 import ticktock.lib.Tickable;
 
 /**
@@ -20,7 +22,7 @@ public class ProfileFollower implements Tickable {
 	// Constants + Gains
 	double kV, kA, kP;
 	double endPosition;
-	public volatile boolean onTarget;
+	public volatile boolean onTarget = false;
 	public volatile double error;
 
 	boolean isInverted;
@@ -41,6 +43,7 @@ public class ProfileFollower implements Tickable {
 
 	public void restart() {
 		this.i = 0;
+		this.error = 1000;
 	}
 
 	@Override
@@ -53,22 +56,30 @@ public class ProfileFollower implements Tickable {
 		}
 		// Get position from the profile
 		double position = profile.get(i).position;
-		// Determine if we are on target. Allowing error of +/- .1
-		onTarget = Math.abs(endPosition + source.getDistance()) < .1;
 
 		error = endPosition - source.getDistance();
 
 		// Calculate the acceleration and velocity feedforward
 		double v = kV * profile.get(i).speed;
+		double a = kA * profile.get(i).acceleration;
 		// Calculate the correction
 		double correction = kP * (position - source.getDistance());
+		System.out.println(kP);
 		// Set the speed of the motor with correction
 		if (isInverted) {
 			output.setSpeed(-(v + correction));
 		} else {
-			output.setSpeed(v + correction);
+			output.setSpeed(a + v + correction);
 		}
 		// Increment our loop counter
+		System.out.println(i);
 		i++;
+	}
+	
+	public boolean isFinished() {
+		System.out.print(i);
+		System.out.println(" " + (profile.length()-1));
+		System.out.println(Math.abs(error));
+		return (Math.abs(error) < 10) && (i == profile.length());
 	}
 }

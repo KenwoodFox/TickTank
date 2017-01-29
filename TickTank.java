@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
@@ -30,7 +31,8 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 	public PIDParameters turnParams;
 	private DoubleSolenoid sol;
 
-	public DriveParameters driveParams;
+	private DriveParameters leftDriveParams;
+	private DriveParameters rightDriveParams;
 
 	/**
 	 * Generates a TickTank using the specified Settings object.
@@ -67,11 +69,14 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 		right = new DriveSide(rightMotors, rightEncoder, config.rightInvEncoder);
 
 		this.turnParams = config.turnParams;
-		this.driveParams = config.params;
+		this.leftDriveParams = config.leftParams;
+		this.rightDriveParams = config.rightParams;
 
 		if (config.hasGears) {
 			this.sol = new DoubleSolenoid(config.solForward, config.solReverse);
 		}
+		
+		this.turnParams = config.turnParams;
 	}
 
 	@Override
@@ -113,6 +118,9 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 			case JAGUAR:
 				motors.add(new Jaguar(port));
 				break;
+			
+			case SPARK:
+				motors.add(new Spark(port));
 			}
 		}
 

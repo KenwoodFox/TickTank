@@ -24,7 +24,6 @@ public class Turn extends Command {
 		this.tank = _tank;
 		controller = new PID(tank, tank, tank.turnParams);
 		ticker = new Ticker(controller, tank.turnParams.interval);
-
 	}
 
 	@Override
@@ -34,6 +33,8 @@ public class Turn extends Command {
 			end();
 		}
 		this.setPoint = tank.navx.getAngle() + degrees;
+		
+		System.out.println("Turning");
 
 		controller.setSetpoint(setPoint);
 		ticker.start();
@@ -46,13 +47,14 @@ public class Turn extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(error) < 10);
+		return (Math.abs(error) < 0.25) && (tank.navx.getRate() < 0.25);
 	}
 
 	@Override
 	protected void end() {
 		tank.stop();
 		ticker.stop();
+		System.out.println("Not turning");
 	}
 
 	@Override

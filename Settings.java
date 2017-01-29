@@ -20,7 +20,7 @@ public class Settings {
 	public int rightEncoderA, rightEncoderB;
 	public boolean hasGyro;
 	public double dpp;
-	public DriveParameters params;
+	public DriveParameters leftParams, rightParams;
 	public PIDParameters turnParams;
 	public int solForward, solReverse;
 	public boolean hasEncoders;

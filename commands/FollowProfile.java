@@ -1,9 +1,12 @@
 package ticktank.commands;
 
+import org.usfirst.frc.team236.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 import ticktock.MultiTicker;
 import ticktank.DriveSide;
 import ticktank.TickTank;
+import ticktank.motionProfile.DriveParameters;
 import ticktank.motionProfile.Profile;
 import ticktank.motionProfile.ProfileFollower;
 
@@ -41,10 +44,13 @@ public class FollowProfile extends Command {
 		if (leftProfile == null || rightProfile == null) {
 			System.out.println("Null profile(s)");
 		} else {
-			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, tank.driveParams, isInverted);
-			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, tank.driveParams, isInverted);
+			DriveParameters leftParams = new DriveParameters(RobotMap.Drive.kV_left, RobotMap.Drive.kA, RobotMap.Drive.kP);
+			DriveParameters rightParams = new DriveParameters(RobotMap.Drive.kV_right, RobotMap.Drive.kA, RobotMap.Drive.kP);
+			
+			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, leftParams, isInverted);
+			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, rightParams, isInverted);
 		}
-		ticker = new MultiTicker(1 / 200.0);
+		ticker = new MultiTicker(1 / 100.0);
 		ticker.addLoopable(leftFollower);
 		ticker.addLoopable(rightFollower);
 	}
@@ -68,13 +74,7 @@ public class FollowProfile extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		// TODO
-		/*
-		if (leftFollower.error < .1 && rightFollower.error < .1) {
-			return true;
-		}
-		*/
-		return false;
+		return leftFollower.isFinished() && rightFollower.isFinished();
 	}
 
 	// Called once after isFinished returns true
