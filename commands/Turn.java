@@ -20,10 +20,13 @@ public class Turn extends Command {
 	public Turn(TickTank _tank, double _degrees, Direction _dir) {
 		if (_dir == Direction.LEFT || _dir == Direction.CCW) {
 			degrees = _degrees * -1;
+		} else {
+			degrees = _degrees;
 		}
 		this.tank = _tank;
 		controller = new PID(tank, tank, tank.turnParams);
 		ticker = new Ticker(controller, tank.turnParams.interval);
+		requires(tank);
 	}
 
 	@Override
@@ -33,16 +36,16 @@ public class Turn extends Command {
 			end();
 		}
 		this.setPoint = tank.navx.getAngle() + degrees;
+		controller.setSetpoint(setPoint);
 		
 		System.out.println("Turning");
-
-		controller.setSetpoint(setPoint);
 		ticker.start();
 	}
 
 	@Override
 	protected void execute() {
 		error = setPoint - tank.navx.getAngle();
+		System.out.println(error);
 	}
 
 	@Override
