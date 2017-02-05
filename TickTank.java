@@ -75,7 +75,7 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 		if (config.hasGears) {
 			this.sol = new DoubleSolenoid(config.solForward, config.solReverse);
 		}
-		
+
 		this.turnParams = config.turnParams;
 	}
 
@@ -118,7 +118,7 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 			case JAGUAR:
 				motors.add(new Jaguar(port));
 				break;
-			
+
 			case SPARK:
 				motors.add(new Spark(port));
 			}
