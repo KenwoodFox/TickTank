@@ -1,12 +1,9 @@
 package ticktank.commands;
 
-import org.usfirst.frc.team236.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 import ticktock.MultiTicker;
 import ticktank.DriveSide;
 import ticktank.TickTank;
-import ticktank.motionProfile.DriveParameters;
 import ticktank.motionProfile.Profile;
 import ticktank.motionProfile.ProfileFollower;
 
@@ -44,11 +41,9 @@ public class FollowProfile extends Command {
 		if (leftProfile == null || rightProfile == null) {
 			System.out.println("Null profile(s)");
 		} else {
-			DriveParameters leftParams = new DriveParameters(RobotMap.Drive.kV_left, RobotMap.Drive.kA, RobotMap.Drive.kP);
-			DriveParameters rightParams = new DriveParameters(RobotMap.Drive.kV_right, RobotMap.Drive.kA, RobotMap.Drive.kP);
-			
-			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, leftParams, isInverted);
-			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, rightParams, isInverted);
+			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, tank.config.leftParams, isInverted);
+			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, tank.config.rightParams,
+					isInverted);
 		}
 		ticker = new MultiTicker(1 / 100.0);
 		ticker.addLoopable(leftFollower);
