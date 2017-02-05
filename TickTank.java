@@ -200,12 +200,12 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 	 * @param speed
 	 *            The speed at which the robot will spin to the right
 	 */
-	public void setSpeed(double speed) {
+	public void pidSet(double speed) {
 		this.setSpeeds(speed, -speed);
 	}
 
 	@Override
-	public double getPos() {
+	public double pidGet() {
 		return navx.getAngle();
 	}
 }
