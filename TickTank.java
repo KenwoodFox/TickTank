@@ -31,8 +31,8 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 	public PIDParameters turnParams;
 	private DoubleSolenoid sol;
 
-	private DriveParameters leftDriveParams;
-	private DriveParameters rightDriveParams;
+	public DriveParameters leftDriveParams;
+	public DriveParameters rightDriveParams;
 
 	/**
 	 * Generates a TickTank using the specified Settings object.

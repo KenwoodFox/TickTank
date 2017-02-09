@@ -1,7 +1,5 @@
 package ticktank.motionProfile;
 
-import pid.PID;
-import pid.PIDParameters;
 import ticktock.lib.Tickable;
 
 /**
@@ -75,10 +73,10 @@ public class ProfileFollower implements Tickable {
 		System.out.println(i);
 		i++;
 	}
-	
+
 	public boolean isFinished() {
 		System.out.print(i);
-		System.out.println(" " + (profile.length()-1));
+		System.out.println(" " + (profile.length() - 1));
 		System.out.println(Math.abs(error));
 		return (Math.abs(error) < 10) && (i == profile.length());
 	}

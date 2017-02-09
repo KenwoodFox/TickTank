@@ -41,9 +41,8 @@ public class FollowProfile extends Command {
 		if (leftProfile == null || rightProfile == null) {
 			System.out.println("Null profile(s)");
 		} else {
-			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, tank.config.leftParams, isInverted);
-			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, tank.config.rightParams,
-					isInverted);
+			leftFollower = new ProfileFollower(leftProfile, leftSide, leftSide, tank.leftDriveParams, isInverted);
+			rightFollower = new ProfileFollower(rightProfile, rightSide, rightSide, tank.rightDriveParams, isInverted);
 		}
 		ticker = new MultiTicker(1 / 100.0);
 		ticker.addLoopable(leftFollower);
