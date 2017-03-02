@@ -16,13 +16,19 @@ package ticktank.motionProfile;
  *            The maximum allowable maxJerk (ft/s/s/s)
  */
 public class ProfileParameters {
-	public double distance, maxVelocity, maxAccel, maxJerk;
+	public double distance, maxVelocity, maxAccel, maxJerk, margin;
 
-	public ProfileParameters(double d, double v, double a, double j) {
+	public static final double DEFAULT_MARGIN = 1;
+
+	public ProfileParameters(double d, double v, double a, double j, double _margin) {
 		distance = d;
 		maxVelocity = v;
 		maxAccel = a;
 		maxJerk = j;
+		margin = _margin;
 	}
 
+	public ProfileParameters(double d, double v, double a, double j) {
+		this(d, v, a, j, DEFAULT_MARGIN);
+	}
 }

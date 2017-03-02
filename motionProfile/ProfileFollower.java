@@ -23,6 +23,8 @@ public class ProfileFollower implements Tickable {
 	public volatile boolean onTarget = false;
 	public volatile double error;
 
+	private double margin;
+
 	boolean isInverted;
 
 	public ProfileFollower(Profile p, ProfileSource source, ProfileOutput output, DriveParameters params,
@@ -33,6 +35,7 @@ public class ProfileFollower implements Tickable {
 		this.kV = params.kV;
 		this.kA = params.kA;
 		this.kP = params.kP;
+		this.margin = p.margin;
 
 		this.endPosition = p.get(p.length() - 1).position;
 
@@ -78,6 +81,6 @@ public class ProfileFollower implements Tickable {
 		System.out.print(i);
 		System.out.println(" " + (profile.length() - 1));
 		System.out.println(Math.abs(error));
-		return (Math.abs(error) < 10) && (i == profile.length());
+		return (Math.abs(error) < margin) && (i == profile.length());
 	}
 }

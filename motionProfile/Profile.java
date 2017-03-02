@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Profile {
 
+	public double margin;
+
 	private enum Stage {
 		// There are seven stages in a motion profile
 		ACCEL_RAMP_UP, // Acceleration gradually increases
@@ -40,6 +42,8 @@ public class Profile {
 	private static final double maxTime = 30;
 
 	public Profile(ProfileParameters params) {
+		margin = params.margin;
+
 		Stage stage = Stage.ACCEL_RAMP_UP;
 
 		double midpoint = params.distance / 2;
