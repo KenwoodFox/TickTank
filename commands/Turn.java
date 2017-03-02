@@ -47,7 +47,7 @@ public class Turn extends Command {
 		}
 		this.setPoint = tank.navx.getAngle() + degrees;
 		controller.setSetpoint(setPoint);
-		
+
 		System.out.println("Turning");
 		ticker.start();
 	}
@@ -74,5 +74,4 @@ public class Turn extends Command {
 	protected void interrupted() {
 		end();
 	}
-
 }
