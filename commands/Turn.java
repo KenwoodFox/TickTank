@@ -8,25 +8,35 @@ import ticktank.TickTank;
 
 public class Turn extends Command {
 
+	private static final double DEFAULT_MARGIN = 1;
+
 	private TickTank tank;
 
 	private double setPoint; // The heading we are going to
 	private double degrees;
 	private double error; // The current distance we still have to go
+	private double margin;
 
 	private PID controller;
 	private Ticker ticker;
 
-	public Turn(TickTank _tank, double _degrees, Direction _dir) {
+	public Turn(TickTank _tank, double _degrees, Direction _dir, double _margin) {
 		if (_dir == Direction.LEFT || _dir == Direction.CCW) {
 			degrees = _degrees * -1;
 		} else {
 			degrees = _degrees;
 		}
+
+		this.margin = _margin;
+
 		this.tank = _tank;
 		controller = new PID(tank, tank, tank.turnParams);
 		ticker = new Ticker(controller, tank.turnParams.interval);
 		requires(tank);
+	}
+
+	public Turn(TickTank _tank, double _degrees, Direction _dir) {
+		this(_tank, _degrees, _dir, DEFAULT_MARGIN);
 	}
 
 	@Override
@@ -50,7 +60,7 @@ public class Turn extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Math.abs(error) < 0.25) && (tank.navx.getRate() < 0.25);
+		return (Math.abs(error) < margin) && (tank.navx.getRate() < 0.25);
 	}
 
 	@Override
