@@ -12,23 +12,28 @@ public class DriveWithJoysticks extends Command {
 		requires(_tank);
 	}
 
+	@Override
 	protected void initialize() {
 
 	}
 
+	@Override
 	protected void execute() {
 		tank.setLeftSpeed(-tank.leftStick.getY());
 		tank.setRightSpeed(-tank.rightStick.getY());
 	}
 
+	@Override
 	protected boolean isFinished() {
 		return false;
 	}
 
+	@Override
 	protected void end() {
 		tank.stop();
 	}
 
+	@Override
 	protected void interrupted() {
 		tank.stop();
 	}
