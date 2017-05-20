@@ -6,10 +6,16 @@ import ticktank.TickTank;
 public class DriveWithJoysticks extends Command {
 
 	private TickTank tank;
+	boolean isReverse = false;
+
+	public DriveWithJoysticks(TickTank _tank, boolean _isReverse) {
+		this.tank = _tank;
+		requires(tank);
+		this.isReverse = _isReverse;
+	}
 
 	public DriveWithJoysticks(TickTank _tank) {
-		this.tank = _tank;
-		requires(_tank);
+		this(_tank, false);
 	}
 
 	@Override
@@ -19,8 +25,13 @@ public class DriveWithJoysticks extends Command {
 
 	@Override
 	protected void execute() {
-		tank.setLeftSpeed(-tank.leftStick.getY());
-		tank.setRightSpeed(-tank.rightStick.getY());
+		if (isReverse) {
+			tank.setLeftSpeed(tank.rightStick.getY());
+			tank.setRightSpeed(tank.leftStick.getY());
+		} else {
+			tank.setLeftSpeed(-tank.leftStick.getY());
+			tank.setRightSpeed(-tank.rightStick.getY());
+		}
 	}
 
 	@Override
