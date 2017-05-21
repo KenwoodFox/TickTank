@@ -27,10 +27,7 @@ public class FollowProfile extends Command {
 	}
 
 	public FollowProfile(TickTank _tank, Profile _left, Profile _right, boolean _isInverted) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		tank = _tank;
-
 		requires(tank);
 
 		this.leftProfile = _left;
