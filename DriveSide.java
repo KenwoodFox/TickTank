@@ -19,8 +19,8 @@ import ticktank.motionProfile.ProfileSource;
  */
 public class DriveSide implements ProfileSource, ProfileOutput {
 
-	private ArrayList<SpeedController> motors;
-	private Encoder enc;
+	public ArrayList<SpeedController> motors;
+	public Encoder enc;
 	private boolean invEncoder;
 
 	public DriveSide(ArrayList<SpeedController> _motors, Encoder _enc, boolean _invEncoder) {
@@ -50,10 +50,6 @@ public class DriveSide implements ProfileSource, ProfileOutput {
 	@Override
 	public double getDistance() {
 		return enc.getDistance();
-	}
-
-	public Encoder getEncoder() {
-		return enc;
 	}
 
 	public double getSpeed() {
