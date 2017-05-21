@@ -4,6 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import ticktank.Gear;
 import ticktank.TickTank;
 
+/**
+ * Shift into the given gear (high or low).
+ *
+ * @author samcf
+ */
 public class Shift extends Command {
 
 	TickTank tank;

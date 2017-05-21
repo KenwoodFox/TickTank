@@ -6,6 +6,12 @@ import ticktock.Ticker;
 import ticktank.Direction;
 import ticktank.TickTank;
 
+/**
+ * Use the PID controller to turn to a given angle offset using the tank's
+ * default turn PID parameters.
+ *
+ * @author samcf
+ */
 public class Turn extends Command {
 
 	private static final double DEFAULT_MARGIN = 1;

@@ -3,6 +3,11 @@ package ticktank.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import ticktank.TickTank;
 
+/**
+ * Shift into high gear.
+ *
+ * @author samcf
+ */
 public class ShiftUp extends Command {
 
 	TickTank tank;

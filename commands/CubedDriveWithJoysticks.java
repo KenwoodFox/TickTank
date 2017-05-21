@@ -3,6 +3,14 @@ package ticktank.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import ticktank.TickTank;
 
+/**
+ * Identical to DriveWithJoysticks, but cubes the input scalar before setting
+ * the drive speed. This can create a smoother output velocity curve which
+ * provides precision at low speeds while still allowing the robot to reach
+ * full speed.
+ *
+ * @author samcf
+ */
 public class CubedDriveWithJoysticks extends Command {
 
 	private TickTank tank;

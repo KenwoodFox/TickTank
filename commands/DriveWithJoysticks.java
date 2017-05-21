@@ -3,6 +3,12 @@ package ticktank.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import ticktank.TickTank;
 
+/**
+ * Drives tank off a basic tank drive. Sets each drive side to the raw Y value
+ * read from its respective joystick.
+ *
+ * @author samcf
+ */
 public class DriveWithJoysticks extends Command {
 
 	private TickTank tank;

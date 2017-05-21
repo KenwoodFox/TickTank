@@ -3,6 +3,11 @@ package ticktank.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import ticktank.TickTank;
 
+/**
+ * Shift into low gear.
+ *
+ * @author samcf
+ */
 public class ShiftDown extends Command {
 
 	TickTank tank;

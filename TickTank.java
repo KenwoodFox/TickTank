@@ -127,6 +127,12 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 		return motors;
 	}
 
+	/**
+	 * Reverse the direction of the given motors.
+	 * 
+	 * @param motors An array of motors to be inverted
+	 * @param inv Invert the motors only if inv is true
+	 */
 	private void invertMotors(ArrayList<SpeedController> motors, boolean inv) {
 		for (SpeedController motor : motors) {
 			motor.setInverted(inv);

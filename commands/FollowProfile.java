@@ -8,7 +8,10 @@ import ticktank.motionProfile.Profile;
 import ticktank.motionProfile.ProfileFollower;
 
 /**
+ * Follow a motion profile using the given parameters. Creates and starts
+ * {@link ProfileFollower} objects to follow the given profiles.
  *
+ * @author samcf
  */
 public class FollowProfile extends Command {
 

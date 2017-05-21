@@ -4,6 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import ticktank.Direction;
 import ticktank.TickTank;
 
+/**
+ * Turns at speed until the goal is approximately reached. Very unreliable.s
+ *
+ * @author samcf
+ */
 public class RawTurn extends Command {
 
 	private TickTank tank;
@@ -54,6 +59,7 @@ public class RawTurn extends Command {
 
 	@Override
 	protected boolean isFinished() {
+		// TODO Add effective end condition
 		return (Math.abs(error) < 10);
 	}
 
