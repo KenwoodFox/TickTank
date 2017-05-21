@@ -147,27 +147,31 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 		this.rightStick = stick;
 	}
 
+	@Deprecated
 	public void setLeftSpeed(double speed) {
 		left.setSpeed(speed);
 	}
 
+	@Deprecated
 	public void setRightSpeed(double speed) {
 		right.setSpeed(speed);
 	}
 
 	public void setSpeeds(double leftSpeed, double rightSpeed) {
-		setLeftSpeed(leftSpeed);
-		setRightSpeed(rightSpeed);
+		left.setSpeed(leftSpeed);
+		right.setSpeed(rightSpeed);
 	}
 
 	public void stop() {
 		setSpeeds(0, 0);
 	}
 
+	@Deprecated
 	public Encoder getLeftEncoder() {
 		return leftEncoder;
 	}
 
+	@Deprecated
 	public Encoder getRightEncoder() {
 		return rightEncoder;
 	}
@@ -191,6 +195,7 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 		}
 	}
 
+	// TODO Reorganize shifting
 	public void shiftUp() {
 		setSol(1);
 	}
