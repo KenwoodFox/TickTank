@@ -21,12 +21,11 @@ import pid.PIDSource;
 import ticktank.commands.DriveWithJoysticks;
 import ticktank.motionProfile.DriveParameters;
 
-public class TickTank extends Subsystem implements PIDSource, PIDOutput {
+public abstract class TickTank extends Subsystem implements PIDSource, PIDOutput {
 	public Joystick leftStick, rightStick;
 	private Encoder leftEncoder, rightEncoder;
-	private ArrayList<SpeedController> leftMotors, rightMotors;
+	private ArrayList<SpeedController> leftMotors, rightMotors = new ArrayList<SpeedController>();
 	public DriveSide left, right;
-	public Settings config;
 	public AHRS navx;
 	public PIDParameters turnParams;
 	private DoubleSolenoid sol;
@@ -40,43 +39,17 @@ public class TickTank extends Subsystem implements PIDSource, PIDOutput {
 	 * @param _settings
 	 *            The settings that define the TickTank object
 	 */
-	public TickTank(Settings _settings) {
-		this.config = _settings;
-		int pwm = 0; // TODO Allow user to define available pwm ports
+	public TickTank(Joystick _leftStick, Joystick _rightStick) {
 
-		leftMotors = makeMotors(config.motorCount, pwm, config.controllerType);
-		rightMotors = makeMotors(config.motorCount, pwm + config.motorCount, config.controllerType);
-
-		invertMotors(leftMotors, config.leftInv);
-		invertMotors(rightMotors, config.rightInv);
-
-		setLeftStick(config.leftStick);
-		setRightStick(config.rightStick);
-
-		if (config.hasEncoders) {
-			leftEncoder = new Encoder(config.leftEncoderA, config.leftEncoderB);
-			rightEncoder = new Encoder(config.rightEncoderA, config.rightEncoderB);
-
-			leftEncoder.setDistancePerPulse(config.dpp);
-			rightEncoder.setDistancePerPulse(config.dpp);
+		for (int i = 0; i < 2; i++) {
+			leftMotors.add(new VictorSP(i));
+			rightMotors.add(new VictorSP(i + 2));
 		}
 
-		if (config.hasGyro) {
-			navx = new AHRS(SPI.Port.kMXP);
-		}
+		navx = new AHRS(Port.kMXP);
 
-		left = new DriveSide(leftMotors, leftEncoder, config.leftInvEncoder);
-		right = new DriveSide(rightMotors, rightEncoder, config.rightInvEncoder);
-
-		this.turnParams = config.turnParams;
-		this.leftDriveParams = config.leftParams;
-		this.rightDriveParams = config.rightParams;
-
-		if (config.hasGears) {
-			this.sol = new DoubleSolenoid(config.solForward, config.solReverse);
-		}
-
-		this.turnParams = config.turnParams;
+		this.leftStick = _leftStick;
+		this.rightStick = _rightStick;
 	}
 
 	@Override
