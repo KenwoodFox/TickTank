@@ -34,10 +34,14 @@ public abstract class TickTank extends Subsystem implements PIDSource, PIDOutput
 	public DriveParameters rightDriveParams;
 
 	/**
-	 * Generates a TickTank using the specified Settings object.
-	 *
-	 * @param _settings
-	 *            The settings that define the TickTank object
+	 * Your constructor should usually do the following things:
+	 * 1. Instantiate the left and right DriveSides
+	 * 2. Instantiate the encoders
+	 * 3. Set distance per pulse for encoders
+	 * 4. Create a NavX object
+	 * 5. Set parameters for turning and drive sides
+	 * 6. Create the solenoids for shifting
+	 * 7. Set turn params
 	 */
 	public TickTank(Joystick _leftStick, Joystick _rightStick) {
 
