@@ -57,69 +57,6 @@ public abstract class TickTank extends Subsystem implements PIDSource, PIDOutput
 		setDefaultCommand(new DriveWithJoysticks(this));
 	}
 
-	/**
-	 * Generate an array of motors.
-	 *
-	 * @param count
-	 *            The number of motors on each side
-	 * @param pwmStartPort
-	 *            The PWM port to begin at. Will occupy the next `count` ports.
-	 * @param type
-	 *            The type of SpeedController to use
-	 * @return An `ArrayList` of `count` motors assigned to the correct PWM
-	 *         ports and type.
-	 */
-	private static ArrayList<SpeedController> makeMotors(int count, int pwmStartPort, ControllerType type) {
-
-		ArrayList<SpeedController> motors = new ArrayList<SpeedController>(count);
-
-		for (int port = pwmStartPort; port < pwmStartPort + count; port++) {
-
-			switch (type) {
-			case VICTORSP:
-				motors.add(new VictorSP(port));
-				break;
-
-			case VICTOR:
-				motors.add(new Victor(port));
-				break;
-
-			case TALON:
-				motors.add(new Talon(port));
-				break;
-
-			case JAGUAR:
-				motors.add(new Jaguar(port));
-				break;
-
-			case SPARK:
-				motors.add(new Spark(port));
-			}
-		}
-
-		return motors;
-	}
-
-	/**
-	 * Reverse the direction of the given motors.
-	 * 
-	 * @param motors An array of motors to be inverted
-	 * @param inv Invert the motors only if inv is true
-	 */
-	private void invertMotors(ArrayList<SpeedController> motors, boolean inv) {
-		for (SpeedController motor : motors) {
-			motor.setInverted(inv);
-		}
-	}
-
-	private void setLeftStick(Joystick stick) {
-		this.leftStick = stick;
-	}
-
-	private void setRightStick(Joystick stick) {
-		this.rightStick = stick;
-	}
-
 	@Deprecated
 	public void setLeftSpeed(double speed) {
 		left.setSpeed(speed);
